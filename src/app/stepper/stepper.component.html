@@ -1,0 +1,132 @@
+<body>
+    <form [formGroup]="Vsregister" class="form">
+        <h1 class="text-center">Registration Form</h1>
+        <ul class="progressbar breadcrumb-container position-relative d-flex justify-content-between list-unstyled mb-0"
+            [ngClass]="{'intro':activeStep !== StepperSteps.intro,'contact': activeStep === StepperSteps.id,'id': activeStep === StepperSteps.password}">
+            <li *ngFor="let item of stepperDetails">
+                <div (click)="stepClicked(item.id)"
+                    class="progress-steps steps d-flex justify-content-center align-items-center flex-column flex-grow-1"
+                    [ngClass]="{
+                'active fw-bold': activeStep === item.id,done: activeStep > item.id
+            }">
+                    <span class="step-number d-flex justify-content-center align-items-center rounded-circle">{{ item.id
+                        }}</span>
+                    <span class="step-text">{{ item.stepName }}</span>
+                </div>
+            </li>
+        </ul>
+        <div class="my-2">
+            <div [formGroupName]="'Intro'">
+                <div *ngIf="activeStep === StepperSteps.intro">
+                    <div class="form-step form-step-active">
+                        <div class="input-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="First name" formControlName="fName" />
+                            <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('Intro.fName')?.errors?.['required']">
+                                Please enter valid First Name.
+                            </div>
+                            <div class="invalid-feedback d-block"
+                                *ngIf=" formSubmitted && Vsregister.get('Intro.fName')?.errors?.['trimError']">undefine
+                                space</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="lname">Middle Name</label>
+                            <input type="text" placeholder="Middle name" formControlName="mName" />
+                            <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('Intro.mName')?.errors?.['required']">
+                                Please enter valid Middle Name.</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" placeholder="Last name" formControlName="lName" />
+                            <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('Intro.lName')?.errors?.['required']">
+                                Please enter valid Last Name.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [formGroupName]="'Contact'">
+                <div *ngIf="activeStep === StepperSteps.contact">
+                    <div class="form-step">
+                        <div class="input-group">
+                            <label for="userName">User Name</label>
+                            <input type="text" placeholder="Vee" formControlName="userName" />
+                            <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('Contact.userName')?.errors?.['required']">
+                                Please enter valid User Name</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input type="email" placeholder="v...@gmail.com" formControlName="Email" />
+                            <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('Contact.Email')?.errors?.['required']">
+                                Please enter valid Email</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" placeholder="+0 999 000 000" formControlName="PhnNumber" />
+                            <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('Contact.PhnNumber')?.errors?.['required']">
+                                Please enter valid Phonenumber</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [formGroupName]="'ID'">
+                <div *ngIf="activeStep === StepperSteps.id">
+                    <div class="form-step">
+                        <div class="input-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" />
+                        </div>
+                        <div class="input-group">
+                            <label for="ID">National ID</label>
+                            <input placeholder="India" />
+                        </div>
+                        <div class="input-group">
+                            <label for="add1">Address</label>
+                            <input type="text" placeholder="Ex. 1 Main St, New York, NY" formControlName="add1" />
+                            <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('ID.add1')?.errors?.['required']">
+                                Please enter valid Address</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [formGroupName]="'passwordd'">
+                <div *ngIf="activeStep === StepperSteps.password">
+                    <div class="input-group">
+                        <label for="email">Confirm Email</label>
+                        <input type="email" placeholder="v...@gmail.com" formControlName="cEmail" />
+                        <div class="invalid-feedback d-block"
+                            *ngIf="formSubmitted && Vsregister.get('passwordd.cEmail')?.errors?.['required']">
+                            Please enter valid Email</div>
+                    </div>
+                    <div class="form-step">
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" formControlName="passwd" />
+                            <!-- <div class="invalid-feedback d-block"
+                                *ngIf="formSubmitted && Vsregister.get('passwordd.passwd')?.errors?.['required']">
+                                Please enter valid Password</div> -->
+                        </div>
+                        <div class="input-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns-group btn:hover">
+            <button *ngIf="activeStep !== StepperSteps.intro && activeStep !== StepperSteps.password"
+                class="btn btn-primary" (click)="previousSteps()">Previous</button>
+            <button class="btn btn-secondary" *ngIf="activeStep === StepperSteps.password"
+                (click)="submitStepper()">Submit</button>
+            <button *ngIf="activeStep !== StepperSteps.password" class="btn btn-primary"
+                (click)="nextSteps()">Next</button>
+        </div>
+    </form>
+</body>

@@ -1,0 +1,207 @@
+:root {
+    --primary-color: rgb(11, 78, 179);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input {
+	display: block;
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid #ccc;
+	border-radius: 0.25rem;
+}
+.width-50 {
+	width: 50%;
+}
+.ml-auto {
+	margin-left: auto;
+}
+.text-center {
+	text-align: center;
+}
+
+body {
+    font-family: 'Montserrat', "Segoe UI", Tahoma, 'Geneva', Verdana, sans-serif;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.breadcrumb-container {
+     .steps {
+         flex-basis: 0;
+
+         .step-number {
+             width: 2.25rem;
+             height: 2.25rem;
+             background-color: #00b5fd;
+             border: 2px solid #0000;
+             cursor: pointer;
+             z-index: 1;
+         }
+
+         .step-text {
+             display: none;
+
+             @media (min-width: 568px) {
+                 display: flex;
+                 font-size: 1rem;
+                 justify-content: center;
+                 line-height: 1.5rem;
+                 text-align: center;
+                 padding-top: 10px;
+             }
+         }
+}
+
+     .active {
+         .step-number {
+             background-color: #000;
+             color: #ffff;
+             border: 2px solid #00b5fd;
+         }
+     }
+
+     .done {
+         .step-number {
+             background-color:#00b5fd;
+             color: white;
+         }
+     }
+ }
+
+ 
+ // end buttons
+ .btns-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+.btn {
+    padding: 0.75rem;
+    display: block;
+    text-decoration: none;
+    background-color: black;
+    color: #00b5fd;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 0 2px #00b5fd, 0 0 0 3px var(--primary-color);
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    color: rgb(20, 20, 20);
+    background-color: #000;
+}
+
+/* Form */
+.form {
+    width: clamp(320px, 30%, 430px);
+    margin: 0 auto;
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 2.35rem;
+    padding: 1.5rem;
+}
+
+.form-step {
+    transform-origin: top;
+    animation: animate 0.5s;
+}
+
+.form-step-active {
+    display: block;
+}
+
+.input-group{
+    margin: 2rem 0px;
+}
+
+@keyframes animate {
+    from {
+        transform: scale(1, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+
+/* Progressbar */
+.progressbar {
+    counter-reset: step;
+    margin: 1rem 0 0rem;
+}
+
+.progressbar::after,
+.progress {
+    content: "";
+    position: absolute;
+    transform: translateY(-50%);
+    height: 4px;
+    left: 18px;
+    background-color: #d6e7f1;
+    // z-index: -1;
+    width: calc(100% - 55px);
+    top: 18px;
+}
+
+ .intro::before {
+    content: "";
+    position: absolute;
+    transform: translateY(-50%);
+    height: 4px;
+    left: 18px;
+    background-color: rgb(0, 0, 0);
+    z-index: 1;
+    width: 88px;
+    top: 18px;
+}
+
+.contact::before {
+    content: "";
+    position: absolute;
+    transform: translateY(-50%);
+    height: 4px;
+    left: 18px;
+    background-color: rgb(0, 0, 0);
+    z-index: 1;
+    width: 200px;
+    top: 18px;
+}
+
+.id::before {
+    content: "";
+    position: absolute;
+    transform: translateY(-50%);
+    height: 4px;
+    left: 18px;
+    background-color: rgb(0, 0, 0);
+    z-index: 1;
+    width: 330px;
+    top: 18px;
+}
+
+
+
+.progress {
+    background-color: black;
+    width: 0%;
+    transition: 0.3s;
+}
